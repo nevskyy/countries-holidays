@@ -37,6 +37,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
         <form
           [formGroup]="applyForm"
           (submit)="submitApplication()"
+          netlify
         >
           <label for="first-name">First Name</label>
           <input
