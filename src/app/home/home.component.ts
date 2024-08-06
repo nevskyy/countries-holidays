@@ -14,10 +14,12 @@ import { HousingService } from '../housing.service';
         <input
           type="text"
           placeholder="Filter by city"
+          #filter
         />
         <button
           class="primary"
           type="button"
+          (click)="filterResults(filter.value)"
         >
           Search
         </button>
@@ -25,7 +27,7 @@ import { HousingService } from '../housing.service';
     </section>
     <section class="results">
       <app-housing-location
-        *ngFor="let housingLocation of housingLocationList"
+        *ngFor="let housingLocation of filtredLocationList"
         [housingLocation]="housingLocation"
       ></app-housing-location>
     </section>
@@ -35,8 +37,25 @@ import { HousingService } from '../housing.service';
 export class HomeComponent {
   housingLocationList: HousingLocation[] = [];
   housingService: HousingService = inject(HousingService);
+  filtredLocationList: HousingLocation[] = [];
 
   constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations()
+    this.housingService
+      .getAllHousingLocations()
+      .then((housingLocationList: HousingLocation[]) => {
+        this.housingLocationList = housingLocationList;
+        this.filtredLocationList = housingLocationList;
+      });
+  }
+
+  filterResults(text: string) {
+    if (!text) this.filtredLocationList = this.housingLocationList;
+
+    this.filtredLocationList = this.housingLocationList.filter(
+      (housingLocation) =>
+        housingLocation?.city
+          .toLocaleLowerCase()
+          .includes(text.toLocaleLowerCase())
+    );
   }
 }
