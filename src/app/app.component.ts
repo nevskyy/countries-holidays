@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
           src="/assets/logo.svg"
           alt="logo"
           aria-hidden="true"
+          [routerLink]="['']"
         />
       </header>
       <section class="content">
