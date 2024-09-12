@@ -1,7 +1,7 @@
 # Countries-holidays
 
 ## Overview
-TThis project is a web application that allows users to search for countries and retrieve detailed information about their public holidays. The app integrates a country search feature and displays holiday data using a clean and user-friendly interface.
+This project is a web application that allows users to search for countries and retrieve detailed information about their public holidays. The app integrates a country search feature and displays holiday data using a clean and user-friendly interface.
 
 ### Features:
 - Search for countries by name 
