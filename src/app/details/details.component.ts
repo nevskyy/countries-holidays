@@ -1,9 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { HousingService } from '../housing.service';
-import { HousingLocation } from '../housing-location';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { countryService } from '../housing.service';
+import { HolidaysInfo } from '../housing-location';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-details',
@@ -11,61 +11,18 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
   imports: [CommonModule, ReactiveFormsModule],
   template: `
     <article>
-      <img
-        [src]="housingLocation?.photo"
-        alt=""
-        class="listing-photo"
-      />
-      <section class="listing-description">
-        <h2 class="listing-heading">{{ housingLocation?.name }}</h2>
-        <p class="listing-location">
-          {{ housingLocation?.city }}, {{ housingLocation?.state }}
-        </p>
-      </section>
-      <section class="listing-features">
-        <h2 class="section-heading">About this housing location</h2>
+      <h2 class="section-heading">Holidais in {{countryService.presentYear}}</h2>
+      <br>
+      <section class="listing-features" *ngFor="let country of countriesHolidays">
+        <h3>{{country.name}}</h3>
+        <br>
         <ul>
-          <li>Units available: {{ housingLocation?.availableUnits }}</li>
-          <li>Does this location have wifi: {{ housingLocation?.wifi }}</li>
+          <li>Local Holiday Name: {{ country?.localName }}</li>
+          <li>Date: {{ country?.date }}</li>
           <li>
-            Does this location have laundry: {{ housingLocation?.laundry }}
+            Type: {{ country?.types?.[0] }}
           </li>
         </ul>
-      </section>
-      <section class="listing-apply">
-        <h2 class="section-heading">Apply now to live here</h2>
-        <form
-          [formGroup]="applyForm"
-          (submit)="submitApplication()"
-          data-netlify="true"
-        >
-          <label for="first-name">First Name</label>
-          <input
-            type="text"
-            id="first-name"
-            formControlName="firstName"
-          />
-
-          <label for="last-name">Last Name</label>
-          <input
-            type="text"
-            id="last-name"
-            formControlName="lastName"
-          />
-
-          <label for="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            formControlName="email"
-          />
-          <button
-            class="primary"
-            type="submit"
-          >
-            Apply now
-          </button>
-        </form>
       </section>
     </article>
   `,
@@ -73,25 +30,16 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 })
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
-  housingService = inject(HousingService);
-  housingLocation: HousingLocation | undefined;
-  applyForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
-  });
+  countryService = inject(countryService);
+  countriesHolidays: HolidaysInfo[] | undefined;
 
   constructor() {
-    const housingLocationId = Number(this.route.snapshot.params['id']);
-    this.housingLocation = this.housingService.getHousingLocationById(housingLocationId);
-    
+    const countryCode = this.route.snapshot.params['code'];
+    console.log('😛', countryCode)
+    this.countryService.getCountryByCode(countryCode).then((country: HolidaysInfo[] | undefined) => {
+      this.countriesHolidays = country;
+      console.log(this.countriesHolidays)
+    });
   }
 
-  submitApplication() {
-    this.housingService.submitApplication(
-      this.applyForm.value.firstName ?? '',
-      this.applyForm.value.lastName ?? '',
-      this.applyForm.value.email ?? ''
-    );
-  }
 }

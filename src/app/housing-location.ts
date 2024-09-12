@@ -1,10 +1,17 @@
-export interface HousingLocation {
-  id: number,
+
+export interface Country {
+  countryCode: string,
   name: string,
-  city: string,
-  state: string,
-  photo: string,
-  availableUnits: number,
-  wifi: boolean,
-  laundry: boolean,
-}
+} 
+
+export interface HolidaysInfo 	
+  {
+    date: string,
+    localName: string,
+    name: string,
+    countryCode: string,
+    global: true,
+    counties: string[],
+    launchYear: 0,
+    types: string[]
+  }

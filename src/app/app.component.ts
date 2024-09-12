@@ -10,9 +10,8 @@ import { RouterModule } from '@angular/router';
       <header>
         <img
           class="brand-logo"
-          src="/assets/logo.svg"
+          src="/assets/happy-holidays.webp"
           alt="logo"
-          aria-hidden="true"
           [routerLink]="['']"
         />
       </header>
@@ -25,5 +24,5 @@ import { RouterModule } from '@angular/router';
   imports: [HomeComponent, RouterModule]
 })
 export class AppComponent {
-  title = 'homes';
+  title = 'Holidays';
 }

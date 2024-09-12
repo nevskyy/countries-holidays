@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HousingLocationComponent } from './housing-location.component';
+import { HousingLocationComponent } from './country-page.component';
 
 describe('HousingLocationComponent', () => {
   let component: HousingLocationComponent;
