@@ -14,24 +14,29 @@ import { countryService } from '../housing.service';
 export class HomeComponent {
   countriesList: Country[] = [];
   countryService: countryService = inject(countryService);
-  filtredLocationList: Country[] = [];
+  filtredCountriesList: Country[] = [];
 
   constructor() {
     this.countryService.getAllCountries().then((countriesList: Country[]) => {
       this.countriesList = countriesList;
-      this.filtredLocationList = this.countriesList;
+      this.filtredCountriesList = this.countriesList;
     });
+  }
+
+  randomPage() {
+    const shuffled = [...this.countriesList].sort(() => 0.5 - Math.random());
+    this.filtredCountriesList = shuffled.slice(0, 3);
   }
 
 
   filterResults(text: string, event: Event) {
     event.preventDefault();
     if (!text || text.trim() === '') {
-      this.filtredLocationList = this.countriesList;
+      this.filtredCountriesList = this.countriesList;
       return;
     }
 
-    this.filtredLocationList = this.countriesList.filter(
+    this.filtredCountriesList = this.countriesList.filter(
       (country) =>
         country?.name
           .toLocaleLowerCase()

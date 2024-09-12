@@ -9,6 +9,4 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./app.component.css'],
   imports: [HomeComponent, RouterModule]
 })
-export class AppComponent {
-  title = 'Holidays';
-}
+export class AppComponent {}

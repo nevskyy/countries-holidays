@@ -1,11 +1,12 @@
 <main>
   <header>
-    <img
-      class="brand-logo"
-      src="/assets/happy-holidays.webp"
-      alt="logo"
-      [routerLink]="['']"
-    />
+    <a [routerLink]="['/']">
+      <img
+        class="brand-logo"
+        src="/assets/happy-holidays.webp"
+        alt="logo"
+      />
+    </a>
   </header>
   <section class="content">
     <router-outlet></router-outlet>
