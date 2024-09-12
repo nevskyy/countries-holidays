@@ -19,13 +19,12 @@ export class DetailsComponent {
   countriesHolidays: HolidaysInfo[] | undefined;
   years: number[] = [];
   selectedYear: number = 2024;
+  countryCode = this.route.snapshot.params['code'];
+
 
   constructor() {
-    const countryCode = this.route.snapshot.params['code'];
-    console.log('😛', countryCode)
-    this.countryService.getCountryByCode(countryCode, this.selectedYear).then((country: HolidaysInfo[] | undefined) => {
+    this.countryService.getCountryByCode(this.countryCode, this.selectedYear).then((country: HolidaysInfo[] | undefined) => {
       this.countriesHolidays = country;
-      console.log(this.countriesHolidays)
     });
 
     this.generateYears();
@@ -44,12 +43,9 @@ export class DetailsComponent {
     const target = event.target as HTMLSelectElement;
     const year = +target.value; 
     this.selectedYear = year
-    console.log('Selected Year:', year);
 
-    const countryCode = this.route.snapshot.params['code'];
-    this.countryService.getCountryByCode(countryCode, this.selectedYear).then((country: HolidaysInfo[] | undefined) => {
+    this.countryService.getCountryByCode(this.countryCode, this.selectedYear).then((country: HolidaysInfo[] | undefined) => {
       this.countriesHolidays = country;
-      console.log(this.countriesHolidays)
     });
   }
 }

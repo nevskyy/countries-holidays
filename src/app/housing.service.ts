@@ -20,7 +20,6 @@ export class countryService {
   }
 
   async getCountryByCode(code: string, year: number): Promise<HolidaysInfo[] | undefined> {
-    console.log(year)
     const data = await fetch(
       `https://date.nager.at/api/v3/PublicHolidays/${
         year

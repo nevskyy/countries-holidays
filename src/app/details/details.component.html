@@ -1,7 +1,9 @@
 <article>
   <h2 class="section-heading">Holidais in {{selectedYear}}</h2>
+  <br>
   <form >
     <label for="selectedYear">Select Year:</label>
+    <br>
     <select name="selectedYear" [(ngModel)]="selectedYear" (change)="onYearChange($event)">
       <option *ngFor="let year of years" [value]="year">
         {{ year }}
