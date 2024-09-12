@@ -1,36 +1,14 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HousingLocationComponent } from '../housing-location/housing-location.component';
-import { Country } from '../housing-location';
+import { CountryPageComponent } from '../country-page/country-page.component';
+import { Country } from '../country-interfaces';
 import { countryService } from '../housing.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, HousingLocationComponent],
-  template: `
-    <section>
-      <form (submit)="filterResults(filter.value, $event)">
-        <input
-          type="text"
-          placeholder="Filter by city"
-          #filter
-        />
-        <button
-          class="primary"
-          type="submit"
-        >
-          Search
-        </button>
-      </form>
-    </section>
-    <section class="results">
-      <app-housing-location
-        *ngFor="let country of filtredLocationList"
-        [country]="country"
-      ></app-housing-location>
-    </section>
-  `,
+  imports: [CommonModule, CountryPageComponent],
+  templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
@@ -41,7 +19,6 @@ export class HomeComponent {
   constructor() {
     this.countryService.getAllCountries().then((countriesList: Country[]) => {
       this.countriesList = countriesList;
-      console.log('👹', this.countriesList)
       this.filtredLocationList = this.countriesList;
     });
   }

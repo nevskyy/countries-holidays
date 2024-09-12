@@ -1,0 +1,15 @@
+<article>
+  <h2 class="section-heading">Holidais in {{countryService.presentYear}}</h2>
+  <br>
+  <section class="listing-features" *ngFor="let country of countriesHolidays">
+    <h3>{{country.name}}</h3>
+    <br>
+    <ul>
+      <li>Local Holiday Name: {{ country?.localName }}</li>
+      <li>Date: {{ country?.date }}</li>
+      <li>
+        Type: {{ country?.types?.[0] }}
+      </li>
+    </ul>
+  </section>
+</article>

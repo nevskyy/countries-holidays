@@ -5,21 +5,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   standalone: true,
   selector: 'app-root',
-  template: `
-    <main>
-      <header>
-        <img
-          class="brand-logo"
-          src="/assets/happy-holidays.webp"
-          alt="logo"
-          [routerLink]="['']"
-        />
-      </header>
-      <section class="content">
-        <router-outlet></router-outlet>
-      </section>
-    </main>
-  `,
+  templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   imports: [HomeComponent, RouterModule]
 })

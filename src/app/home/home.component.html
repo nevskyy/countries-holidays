@@ -1,0 +1,21 @@
+<section>
+  <form (submit)="filterResults(filter.value, $event)">
+    <input
+      type="text"
+      placeholder="Filter by city"
+      #filter
+    />
+    <button
+      class="primary"
+      type="submit"
+    >
+      Search
+    </button>
+  </form>
+</section>
+<section class="results">
+  <app-country-page
+    *ngFor="let country of filtredLocationList"
+    [country]="country"
+  ></app-country-page>
+</section>
